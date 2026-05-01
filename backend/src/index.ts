@@ -1,0 +1,22 @@
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 4000;
+
+app.use(cors());
+app.use(express.json());
+import postsRouter from './routes/posts.routes';
+
+app.use('/api/posts', postsRouter);
+
+app.get('/health', (_req, res) => {
+  res.json({ status: 'ok', message: 'Backend running 🟢' });
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
