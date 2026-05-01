@@ -9,6 +9,9 @@ const PORT = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.json());
+import postsRouter from './routes/posts.routes';
+
+app.use('/api/posts', postsRouter);
 
 app.get('/health', (_req, res) => {
   res.json({ status: 'ok', message: 'Backend running 🟢' });
