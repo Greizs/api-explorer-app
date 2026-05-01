@@ -1,21 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { getPosts } from '@/services/posts.service';
-import { Post } from '@/types/post.types';
+import { usePosts } from '@/hooks/usePosts';
 import PostCard from '@/components/PostCard';
 
 export default function Home() {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    getPosts()
-      .then(setPosts)
-      .catch(() => setError('No se pudieron cargar los posts'))
-      .finally(() => setLoading(false));
-  }, []);
+  const { posts, loading, error } = usePosts();
 
   if (loading) return <p className="text-center mt-20">Cargando posts...</p>;
   if (error) return <p className="text-center mt-20 text-red-500">{error}</p>;
