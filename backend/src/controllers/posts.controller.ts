@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import axios from 'axios';
 
-const BASE_URL = 'https://jsonplaceholder.typicode.com';
+const BASE_URL = process.env.EXTERNAL_API_URL;
 
 export const getPosts = async (_req: Request, res: Response) => {
   try {
